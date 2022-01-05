@@ -1,12 +1,13 @@
 module.exports = {
   siteMetadata: {
-    siteUrl: "https://www.yourdomain.tld",
+    siteUrl: "https://www.brandi.codes",
     title: "portfolio",
   },
   plugins: [
     "gatsby-plugin-image",
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sitemap",
+    "gatsby-plugin-material-ui",
     {
       resolve: "gatsby-plugin-manifest",
       options: {
