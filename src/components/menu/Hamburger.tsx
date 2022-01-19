@@ -1,6 +1,8 @@
-import { AppBar, IconButton, Toolbar } from "@mui/material";
-import { Close as CloseIcon, Menu as MenuIcon } from "@mui/icons-material";
 import React, { FC, useState } from "react";
+import { AppBar, IconButton, Theme, Toolbar } from "@mui/material";
+import { Close as CloseIcon, Menu as MenuIcon } from "@mui/icons-material";
+import { makeStyles } from "@mui/styles";
+
 import Menu from "./Menu";
 
 const menuItems = [
@@ -9,24 +11,41 @@ const menuItems = [
   { title: "Contact", href: "/" },
 ];
 
+const useStyles = makeStyles({
+  appBar: {
+    boxShadow: "none !important",
+    zIndex: 2,
+  },
+  toolbar: {
+    display: "flex",
+    justifyContent: "flex-end",
+  },
+  hamburgerIcon: {
+    zIndex: 2,
+  },
+});
+
 const Hamburger: FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const classes = useStyles();
+
   return (
     <>
-      <AppBar position="static">
-        <Toolbar
-          disableGutters
-          sx={{ display: "flex", justifyContent: "flex-end" }}
-        >
+      <AppBar color="transparent" className={classes.appBar}>
+        <Toolbar disableGutters className={classes.toolbar}>
           <IconButton
             edge="start"
-            color="default"
             aria-label="open drawer"
             onClick={() => setIsOpen(!isOpen)}
             disableRipple
-            sx={{ zIndex: 2 }}
+            size="large"
+            className={classes.hamburgerIcon}
           >
-            {isOpen ? <CloseIcon /> : <MenuIcon />}
+            {isOpen ? (
+              <CloseIcon color="primary" fontSize="large" />
+            ) : (
+              <MenuIcon color="primary" fontSize="large" />
+            )}
           </IconButton>
 
           <Menu isOpen={isOpen} setIsOpen={setIsOpen} pages={menuItems} />
