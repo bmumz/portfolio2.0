@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import { AppBar, IconButton, Theme, Toolbar } from "@mui/material";
+import { AppBar, IconButton, Toolbar } from "@mui/material";
 import { Close as CloseIcon, Menu as MenuIcon } from "@mui/icons-material";
 import { makeStyles } from "@mui/styles";
 

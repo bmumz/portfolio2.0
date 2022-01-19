@@ -1,3 +1,4 @@
+import React, { FC } from "react";
 import {
   Button,
   Card,
@@ -6,25 +7,38 @@ import {
   CardContent,
   CardMedia,
   darken,
+  Theme,
   Typography,
 } from "@mui/material";
-import * as React from "react";
+import { makeStyles } from "@mui/styles";
 
 type ProjectCardProps = {
   project: IProject;
 };
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+const useStyles = makeStyles((theme: Theme) => ({
+  cardRoot: {
+    maxWidth: 500,
+    margin: theme.spacing(1),
+    backgroundColor: `${darken(
+      theme.palette.background.paper,
+      0.015
+    )} !important`,
+  },
+  linksRoot: {
+    backgroundColor: `${darken(
+      theme.palette.background.paper,
+      0.03
+    )} !important`,
+    cursor: "default",
+  },
+}));
+
+const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
   const { title, img, stack, description } = project;
+  const classes = useStyles();
   return (
-    <Card
-      raised
-      sx={{
-        maxWidth: 500,
-        margin: (theme) => theme.spacing(1),
-        backgroundColor: (theme) => theme.palette.pewter.light,
-      }}
-    >
+    <Card raised className={classes.cardRoot}>
       <CardMedia component="img" height="300" image={img.url} alt={img.alt} />
 
       <CardContent>
@@ -48,12 +62,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             </Typography>
           ))}
       </CardContent>
-      <CardActionArea
-        sx={{
-          backgroundColor: (theme) => darken(theme.palette.pewter.light, 0.025),
-          cursor: "default",
-        }}
-      >
+      <CardActionArea className={classes.linksRoot}>
         <CardActions>
           <Button size="small">View Live</Button>
           <Button size="small">View Source Code</Button>

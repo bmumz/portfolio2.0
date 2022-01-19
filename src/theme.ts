@@ -1,40 +1,20 @@
 import { createTheme } from "@mui/material/styles";
 
-declare module "@mui/material/styles" {
-  interface Palette {
-    cognac?: Palette["primary"];
-    navy?: Palette["primary"];
-    pewter: Palette["primary"];
-  }
-
-  interface PaletteOptions {
-    cognac?: PaletteOptions["primary"];
-    navy?: PaletteOptions["primary"];
-    pewter: PaletteOptions["primary"];
-  }
-}
-
 export const theme = createTheme({
   palette: {
+    // cognac
     primary: {
-      // cognac
-      main: "#9E6F6D",
-    },
-    cognac: {
       main: "#9E6F6D",
       light: "#e5dedd",
       dark: "#7e5957",
+      contrastText: "#fffaf1",
     },
-    navy: {
-      main: "#1E3148",
-    },
-    pewter: {
-      main: "#a7a19e",
-      light: "#e5e3e2",
-    },
-    // rich navy
+    // emerald green
     secondary: {
-      main: "#1E3148",
+      main: "#034C52",
+      light: "#b3c9cb",
+      dark: "#023539",
+      contrastText: "#011e20",
     },
     error: {
       main: "#c1220c",
@@ -50,7 +30,7 @@ export const theme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
-          backgroundColor: "#fbe8e8",
+          backgroundColor: "#fffaf1",
         },
       },
     },
