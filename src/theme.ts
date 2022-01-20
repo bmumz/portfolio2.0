@@ -45,6 +45,9 @@ export const theme = createTheme({
       // black
       secondary: "#333333",
     },
+    background: {
+      paper: "#fffaf1",
+    },
   },
   components: {
     MuiPaper: {

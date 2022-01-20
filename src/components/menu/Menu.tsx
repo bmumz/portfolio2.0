@@ -11,7 +11,7 @@ type MenuProps = {
 
 const useStyles = makeStyles((theme: Theme) => ({
   drawerRoot: {
-    zIndex: "1 !important",
+    zIndex: "3 !important",
   },
   drawerPaper: {
     padding: theme.spacing(2),
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: "25vw",
     },
     [theme.breakpoints.down("sm")]: {
-      width: "60vw",
+      width: "100vw",
     },
   },
   menuRoot: {
@@ -30,8 +30,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   linkRoot: {
     textDecoration: "none",
     fontSize: "2rem",
+    padding: theme.spacing(1),
   },
   linkTitle: {
+    fontWeight: "500 !important",
+    letterSpacing: `${theme.spacing(0.25)} !important`,
     position: "relative",
     textDecoration: "none",
     display: "inline-block",
@@ -42,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       position: "absolute",
       zIndex: -1,
       width: "100%",
-      height: 1,
+      height: 2,
       left: "0",
       bottom: "0",
       backgroundColor: theme.palette.secondary.main,
