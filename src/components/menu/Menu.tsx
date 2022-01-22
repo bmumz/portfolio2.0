@@ -77,6 +77,7 @@ const Menu: FC<MenuProps> = ({ pages, isOpen, setIsOpen }) => {
       className={classes.drawerRoot}
       PaperProps={{
         className: classes.drawerPaper,
+        sx: { backgroundColor: (theme) => theme.palette.background.default },
       }}
     >
       <Box className={classes.menuRoot}>
