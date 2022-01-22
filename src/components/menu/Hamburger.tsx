@@ -22,7 +22,7 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "flex-end",
   },
-  hamburgerIcon: {
+  icon: {
     zIndex: 2,
   },
 });
@@ -41,12 +41,15 @@ const Hamburger: FC = () => {
             onClick={() => setIsOpen(!isOpen)}
             disableRipple
             size="large"
-            className={classes.hamburgerIcon}
+            className={classes.icon}
           >
             {isOpen ? (
-              <CloseIcon color="primary" fontSize="large" />
+              <CloseIcon color="secondary" fontSize="large" />
             ) : (
-              <MenuIcon color="primary" fontSize="large" />
+              <MenuIcon
+                fontSize="large"
+                sx={{ color: (theme) => theme.palette.background.paper }}
+              />
             )}
           </IconButton>
 
