@@ -44,5 +44,22 @@ export const theme = createTheme({
         disableTouchRipple: true,
       },
     },
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          marginLeft: 3,
+          marginTop: 0,
+          position: "absolute",
+          bottom: "-20px",
+        },
+      },
+    },
+    MuiFilledInput: {
+      styleOverrides: {
+        root: {
+          marginBottom: 3,
+        },
+      },
+    },
   },
 });

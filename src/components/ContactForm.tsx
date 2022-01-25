@@ -9,9 +9,10 @@ import {
   Theme,
   Button,
 } from "@mui/material";
-import { Form, Formik, FormikHelpers } from "formik";
+import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import { makeStyles } from "@mui/styles";
+import { useSnackbar } from "notistack";
 
 const useStyles = makeStyles((theme: Theme) => ({
   cardRoot: {
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   smallInputPadding: {
     [theme.breakpoints.up("md")]: {
-      paddingRight: `${theme.spacing(2)} !important`,
+      paddingRight: `${theme.spacing(3)} !important`,
     },
   },
   inputColor: {
@@ -38,6 +39,7 @@ interface FormValues {
 
 const ContactForm: FC = () => {
   const classes = useStyles();
+  const { enqueueSnackbar } = useSnackbar();
 
   return (
     <Card raised className={classes.cardRoot}>
@@ -76,16 +78,21 @@ const ContactForm: FC = () => {
             .email("Please provide a properly formatted email.")
             .required("Email is required."),
           subject: Yup.string().max(350).required("Subject is required."),
-          message: Yup.string().max(1500).required(),
+          message: Yup.string().max(1500).required("Message is required."),
         })}
-        onSubmit={(
-          values: FormValues,
-          { setSubmitting }: FormikHelpers<FormValues>
-        ) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 500);
+        onSubmit={(values: FormValues) => {
+          // TO DO: submit email to BE
+          console.log(values);
+          try {
+            enqueueSnackbar("Your inquiry has been submitted!", {
+              variant: "success",
+            });
+          } catch (err) {
+            console.error(err);
+            enqueueSnackbar("There was an error submitting the form.", {
+              variant: "error",
+            });
+          }
         }}
       >
         {({
@@ -95,137 +102,134 @@ const ContactForm: FC = () => {
           handleSubmit,
           touched,
           values,
-        }): JSX.Element => {
-          console.log(values);
-          return (
-            <>
+        }): JSX.Element => (
+          <>
+            <CardContent
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+              component={Form}
+              onSubmit={handleSubmit}
+            >
+              <Grid container>
+                <>
+                  <Grid
+                    container
+                    sx={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <Grid
+                      item
+                      xs={12}
+                      sm={12}
+                      lg={6}
+                      sx={{
+                        paddingTop: (theme) => theme.spacing(3),
+                      }}
+                      className={classes.smallInputPadding}
+                    >
+                      <TextField
+                        id="name"
+                        label="name"
+                        variant="filled"
+                        fullWidth
+                        inputProps={{
+                          className: classes.inputColor,
+                        }}
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        value={values.name}
+                        error={Boolean(touched.name && errors.name)}
+                        helperText={touched.name && errors.name}
+                      />
+                    </Grid>
+                    <Grid
+                      item
+                      xs={12}
+                      sm={12}
+                      lg={6}
+                      sx={{
+                        paddingTop: (theme) => theme.spacing(3),
+                      }}
+                    >
+                      <TextField
+                        id="email"
+                        label="email"
+                        variant="filled"
+                        fullWidth
+                        inputProps={{
+                          className: classes.inputColor,
+                        }}
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        value={values.email}
+                        error={Boolean(touched.email && errors.email)}
+                        helperText={touched.email && errors.email}
+                      />
+                    </Grid>
+                  </Grid>
+
+                  <Grid
+                    item
+                    xs={12}
+                    sm={12}
+                    lg={12}
+                    sx={{ paddingTop: (theme) => theme.spacing(3) }}
+                  >
+                    <TextField
+                      id="subject"
+                      label="subject"
+                      variant="filled"
+                      fullWidth
+                      inputProps={{
+                        className: classes.inputColor,
+                      }}
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.subject}
+                      error={Boolean(touched.subject && errors.subject)}
+                      helperText={touched.subject && errors.subject}
+                    />
+                  </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    sm={12}
+                    lg={12}
+                    sx={{ padding: (theme) => theme.spacing(3, 0) }}
+                  >
+                    <TextField
+                      id="message"
+                      label="message"
+                      variant="filled"
+                      fullWidth
+                      multiline
+                      rows={4}
+                      inputProps={{
+                        className: classes.inputColor,
+                      }}
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.message}
+                      error={Boolean(touched.message && errors.message)}
+                      helperText={touched.message && errors.message}
+                    />
+                  </Grid>
+                </>
+              </Grid>
               <CardContent
                 sx={{
                   display: "flex",
-                  flexDirection: "column",
+                  justifyContent: "flex-end",
                 }}
-                component={Form}
-                onSubmit={handleSubmit}
               >
-                <Grid container>
-                  <>
-                    <Grid
-                      container
-                      sx={{ display: "flex", justifyContent: "space-between" }}
-                    >
-                      <Grid
-                        item
-                        xs={12}
-                        sm={12}
-                        lg={6}
-                        sx={{
-                          padding: (theme) => theme.spacing(2, 0),
-                        }}
-                        className={classes.smallInputPadding}
-                      >
-                        <TextField
-                          id="name"
-                          label="name"
-                          variant="filled"
-                          fullWidth
-                          inputProps={{
-                            className: classes.inputColor,
-                          }}
-                          onBlur={handleBlur}
-                          onChange={handleChange}
-                          value={values.name}
-                          error={Boolean(touched.name && errors.name)}
-                          helperText={touched.name && errors.name}
-                        />
-                      </Grid>
-                      <Grid
-                        item
-                        xs={12}
-                        sm={12}
-                        lg={6}
-                        sx={{
-                          padding: (theme) => theme.spacing(2, 0),
-                        }}
-                      >
-                        <TextField
-                          id="email"
-                          label="email"
-                          variant="filled"
-                          fullWidth
-                          inputProps={{
-                            className: classes.inputColor,
-                          }}
-                          onBlur={handleBlur}
-                          onChange={handleChange}
-                          value={values.email}
-                          error={Boolean(touched.email && errors.email)}
-                          helperText={touched.email && errors.email}
-                        />
-                      </Grid>
-                    </Grid>
-
-                    <Grid
-                      item
-                      xs={12}
-                      sm={12}
-                      lg={12}
-                      sx={{ padding: (theme) => theme.spacing(2, 0) }}
-                    >
-                      <TextField
-                        id="subject"
-                        label="subject"
-                        variant="filled"
-                        fullWidth
-                        inputProps={{
-                          className: classes.inputColor,
-                        }}
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        value={values.subject}
-                        error={Boolean(touched.subject && errors.subject)}
-                        helperText={touched.subject && errors.subject}
-                      />
-                    </Grid>
-                    <Grid
-                      item
-                      xs={12}
-                      sm={12}
-                      lg={12}
-                      sx={{ padding: (theme) => theme.spacing(2, 0) }}
-                    >
-                      <TextField
-                        id="message"
-                        label="message"
-                        variant="filled"
-                        fullWidth
-                        multiline
-                        rows={4}
-                        inputProps={{
-                          className: classes.inputColor,
-                        }}
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        value={values.message}
-                        error={Boolean(touched.message && errors.message)}
-                        helperText={touched.message && errors.message}
-                      />
-                    </Grid>
-                  </>
-                </Grid>
-                <CardContent
-                  sx={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                  }}
-                >
-                  <Button variant="contained" type="submit">
-                    Send
-                  </Button>
-                </CardContent>
+                <Button variant="contained" type="submit">
+                  Send
+                </Button>
               </CardContent>
-            </>
-          );
-        }}
+            </CardContent>
+          </>
+        )}
       </Formik>
     </Card>
   );
