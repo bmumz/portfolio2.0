@@ -3,16 +3,16 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { theme } from "./src/theme";
 import { SnackbarProvider } from "notistack";
 import { Zoom } from "@mui/material";
-import Background from "./src/components/Background.tsx";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
+import { Layout } from "./src/layout";
 config.autoAddCss = false;
 
 export function wrapRootElement({ element }) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline>
-        <Background>
+        <Layout>
           <SnackbarProvider
             anchorOrigin={{
               vertical: "top",
@@ -23,7 +23,7 @@ export function wrapRootElement({ element }) {
           >
             {element}
           </SnackbarProvider>
-        </Background>
+        </Layout>
       </CssBaseline>
     </ThemeProvider>
   );

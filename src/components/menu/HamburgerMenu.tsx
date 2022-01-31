@@ -22,12 +22,9 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "flex-end",
   },
-  icon: {
-    zIndex: 2,
-  },
 });
 
-const Hamburger: FC = () => {
+const HamburgerMenu: FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const classes = useStyles();
 
@@ -41,7 +38,6 @@ const Hamburger: FC = () => {
             onClick={() => setIsOpen(!isOpen)}
             disableRipple
             size="large"
-            className={classes.icon}
           >
             {isOpen ? (
               <CloseIcon color="secondary" fontSize="large" />
@@ -52,7 +48,6 @@ const Hamburger: FC = () => {
               />
             )}
           </IconButton>
-
           <Menu isOpen={isOpen} setIsOpen={setIsOpen} pages={menuItems} />
         </Toolbar>
       </AppBar>
@@ -60,4 +55,4 @@ const Hamburger: FC = () => {
   );
 };
 
-export default Hamburger;
+export default HamburgerMenu;
