@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const PortfolioCard: FC = () => {
+const ProfileCard: FC = () => {
   const classes = useStyles();
   return (
     <Card raised className={classes.cardRoot}>
@@ -150,4 +150,4 @@ const PortfolioCard: FC = () => {
   );
 };
 
-export default PortfolioCard;
+export default ProfileCard;
