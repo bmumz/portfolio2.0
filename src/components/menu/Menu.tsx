@@ -3,11 +3,7 @@ import { Box, Drawer, Link, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import GatsbyLink from "gatsby-link";
 
-type MenuProps = {
-  pages: IPage[];
-  isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-};
+import { isInternalLink } from "../../utils";
 
 const useStyles = makeStyles((theme: Theme) => ({
   drawerRoot: {
@@ -65,8 +61,20 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+type MenuProps = {
+  pages: IPage[];
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+};
+
 const Menu: FC<MenuProps> = ({ pages, isOpen, setIsOpen }) => {
   const classes = useStyles();
+
+  const PageTitle: FC<Partial<IPage>> = ({ title }) => (
+    <Typography variant="h4" className={classes.linkTitle} color="secondary">
+      {title}
+    </Typography>
+  );
 
   return (
     <Drawer
@@ -82,22 +90,31 @@ const Menu: FC<MenuProps> = ({ pages, isOpen, setIsOpen }) => {
     >
       <Box className={classes.menuRoot}>
         {pages &&
-          pages.map((page: IPage) => (
-            <Link
-              component={GatsbyLink}
-              to={page.href}
-              onClick={() => setIsOpen(false)}
-              className={classes.linkRoot}
-            >
-              <Typography
-                variant="h4"
-                className={classes.linkTitle}
-                color="secondary"
-              >
-                {page.title}
-              </Typography>
-            </Link>
-          ))}
+          pages.map((page: IPage) => {
+            const isInternal = isInternalLink(page.href);
+            return (
+              <>
+                {isInternal ? (
+                  <Link
+                    component={GatsbyLink}
+                    to={page.href}
+                    onClick={() => setIsOpen(false)}
+                    className={classes.linkRoot}
+                  >
+                    <PageTitle title={page.title} />
+                  </Link>
+                ) : (
+                  <a
+                    href={page.href}
+                    onClick={() => setIsOpen(false)}
+                    className={classes.linkRoot}
+                  >
+                    <PageTitle title={page.title} />
+                  </a>
+                )}
+              </>
+            );
+          })}
       </Box>
     </Drawer>
   );
