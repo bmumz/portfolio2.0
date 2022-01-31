@@ -4,14 +4,7 @@ import { Close as CloseIcon, Menu as MenuIcon } from "@mui/icons-material";
 import { makeStyles } from "@mui/styles";
 
 import Menu from "./Menu";
-
-const menuItems = [
-  { title: "Home", href: "/" },
-  { title: "About", href: "/" },
-  { title: "Projects", href: "/" },
-  { title: "Blog", href: "/" },
-  { title: "Contact", href: "/" },
-];
+import { pages } from "../../routes";
 
 const useStyles = makeStyles({
   appBar: {
@@ -48,7 +41,7 @@ const HamburgerMenu: FC = () => {
               />
             )}
           </IconButton>
-          <Menu isOpen={isOpen} setIsOpen={setIsOpen} pages={menuItems} />
+          <Menu isOpen={isOpen} setIsOpen={setIsOpen} pages={pages} />
         </Toolbar>
       </AppBar>
     </>
