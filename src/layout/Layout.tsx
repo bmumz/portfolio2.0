@@ -8,7 +8,6 @@ type LayoutProps = {
 
 const Layout: FC<LayoutProps> = ({ children }) => (
   <>
-    <HamburgerMenu />
     <Background>{children}</Background>
   </>
 );

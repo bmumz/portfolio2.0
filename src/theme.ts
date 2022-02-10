@@ -61,5 +61,13 @@ export const theme = createTheme({
         },
       },
     },
+    MuiSvgIcon: {
+      styleOverrides: {
+        //@ts-ignore
+        fontSizeMedium: {
+          fontSize: "1.95rem",
+        },
+      },
+    },
   },
 });

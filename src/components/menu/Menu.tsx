@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction } from "react";
+import React, { Dispatch, FC, Fragment, SetStateAction } from "react";
 import { Box, Drawer, Link, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import GatsbyLink from "gatsby-link";
@@ -90,10 +90,10 @@ const Menu: FC<MenuProps> = ({ pages, isOpen, setIsOpen }) => {
     >
       <Box className={classes.menuRoot}>
         {pages &&
-          pages.map((page: IPage) => {
+          pages.map((page: IPage, index) => {
             const isInternal = isInternalLink(page.href);
             return (
-              <>
+              <Fragment key={index}>
                 {isInternal ? (
                   <Link
                     component={GatsbyLink}
@@ -112,7 +112,7 @@ const Menu: FC<MenuProps> = ({ pages, isOpen, setIsOpen }) => {
                     <PageTitle title={page.title} />
                   </a>
                 )}
-              </>
+              </Fragment>
             );
           })}
       </Box>

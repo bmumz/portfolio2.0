@@ -3,9 +3,9 @@ import {
   Card,
   CardActionArea,
   CardActions,
-  CardContent,
   CardMedia,
   Divider,
+  Grid,
   lighten,
   Theme,
   Typography,
@@ -23,26 +23,17 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles((theme: Theme) => ({
   cardRoot: {
     minWidth: "16vw",
+    maxWidth: "55vw",
     minHeight: "40vh",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
-    position: "absolute",
-    left: "28%",
-    top: "30%",
     zIndex: 3,
     backgroundColor: `${lighten("#f5ede6", 0.45)} !important`,
+    margin: theme.spacing(8, 0),
     [theme.breakpoints.down("md")]: {
-      left: "20%",
       minWidth: "40vw",
-    },
-    [theme.breakpoints.down("sm")]: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      left: "10%",
-      top: "10%",
-      minHeight: "50vh",
+      maxWidth: "80vw",
     },
   },
   divider: {
@@ -61,63 +52,145 @@ const useStyles = makeStyles((theme: Theme) => ({
   link: {
     padding: theme.spacing(0, 0.25),
   },
+  blurbRoot: {
+    [theme.breakpoints.up("md")]: {
+      padding: theme.spacing(0, 6),
+    },
+  },
+  name: {
+    paddingLeft: theme.spacing(1),
+    color: theme.palette.primary.main,
+  },
 }));
 
 const ProfileCard: FC = () => {
   const classes = useStyles();
+
   return (
     <Card raised className={classes.cardRoot}>
-      <CardContent
+      <Grid
+        container
         sx={{
-          display: "flex",
-          justifyContent: "center",
-          paddingTop: (theme) => theme.spacing(4),
+          padding: (theme) => theme.spacing(4, 6),
+          flexDirection: (theme) =>
+            theme.breakpoints.down("md") ? "row" : "column",
         }}
       >
-        <CardMedia
-          component="img"
-          height="300"
-          image="https://brandi.codes/static/75b7b58e52612b5966855f7e3acf1c36/88b18/headshot01.jpg"
-          alt="Brandi's headshot"
-          sx={{ borderRadius: "100%", width: 250, height: 250 }}
-        />
-      </CardContent>
-      <CardContent
-        style={{
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
-        }}
-      >
-        <Typography variant="h4" color="secondary" sx={{ fontWeight: 500 }}>
-          Brandi Mummery
-        </Typography>
-        <Divider
-          variant="fullWidth"
+        <Grid
+          item
+          xs={12}
+          lg={4}
           sx={{
-            borderColor: (theme) => theme.palette.primary.main,
-            borderBottomWidth: 3,
-            width: "25%",
-            margin: (theme) => theme.spacing(2),
-            letterSpacing: (theme) => theme.spacing(0.25),
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
           }}
-        />
-        <Typography
-          variant="h6"
-          color="text.secondary"
-          sx={{ letterSpacing: (theme) => theme.spacing(0.25) }}
         >
-          Software Developer
-        </Typography>
-        <Typography
-          variant="subtitle2"
-          color="text.secondary"
-          sx={{ letterSpacing: (theme) => theme.spacing(0.25) }}
+          <CardMedia
+            component="img"
+            height="300"
+            image="https://brandi.codes/static/75b7b58e52612b5966855f7e3acf1c36/88b18/headshot01.jpg"
+            alt="Brandi's headshot"
+            sx={{ borderRadius: "100%", width: 250, height: 250 }}
+          />
+          <Grid
+            item
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "column",
+              paddingTop: (theme) => theme.spacing(2),
+            }}
+          >
+            <Typography
+              variant="h4"
+              color="secondary"
+              sx={{
+                fontWeight: 500,
+                fontSize: (theme) => theme.breakpoints.down("sm") && "1.5rem",
+              }}
+            >
+              Brandi Mummery
+            </Typography>
+
+            <Divider
+              variant="fullWidth"
+              sx={{
+                borderColor: (theme) => theme.palette.primary.main,
+                borderBottomWidth: 3,
+                width: "25%",
+                margin: (theme) => theme.spacing(2),
+                letterSpacing: (theme) => theme.spacing(0.25),
+              }}
+            />
+            <Typography
+              variant="h6"
+              color="text.secondary"
+              sx={{ letterSpacing: (theme) => theme.spacing(0.15) }}
+            >
+              Software Developer
+            </Typography>
+            <Typography
+              variant="subtitle2"
+              color="text.secondary"
+              sx={{ letterSpacing: (theme) => theme.spacing(0.25) }}
+            >
+              Toronto, ON{" "}
+              <FontAwesomeIcon icon={faCanadianMapleLeaf} color="#C41E3A" />
+            </Typography>
+          </Grid>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          lg={8}
+          className={classes.blurbRoot}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "column",
+          }}
         >
-          Toronto, ON{" "}
-          <FontAwesomeIcon icon={faCanadianMapleLeaf} color="#C41E3A" />
-        </Typography>
-      </CardContent>
+          <Typography
+            variant="h6"
+            color="text.secondary"
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              paddingTop: (theme) => theme.spacing(2),
+            }}
+          >
+            Hi 👋, I'm <span className={classes.name}>Brandi</span> —
+          </Typography>
+          <Grid container>
+            <Typography
+              color="text.secondary"
+              sx={{ padding: (theme) => theme.spacing(1, 0) }}
+            >
+              a self-taught developer with a background in photography and
+              customer service.
+            </Typography>
+            <Typography
+              color="text.secondary"
+              sx={{ padding: (theme) => theme.spacing(1, 0) }}
+            >
+              I am currently working for a web design and development agency,
+              contributing across the whole stack for a variety of clients. I
+              really enjoy it, because it gives me a chance to dabble in so many
+              different technologies.
+            </Typography>
+            <Typography
+              color="text.secondary"
+              sx={{ paddingTop: (theme) => theme.spacing(1) }}
+            >
+              <b>Technologies I'm currently working with:</b>
+              <br /> ⚛️ React, React Native, Typescript, Node.js, Express, both
+              relational and non-relational databases.
+            </Typography>
+          </Grid>
+        </Grid>
+      </Grid>
       <CardActionArea className={classes.linksRoot}>
         <CardActions className={classes.links}>
           <FontAwesomeIcon

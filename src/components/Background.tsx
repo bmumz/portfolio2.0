@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { Theme, Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import HamburgerMenu from "./menu/HamburgerMenu";
 
 const useStyles = makeStyles((theme: Theme) => ({
   backgroundLeft: {
@@ -19,41 +20,19 @@ const Background: FC<BackgroundProps> = ({ children }) => {
   const classes = useStyles();
   return (
     <>
-      <Box
-        className={classes.backgroundLeft}
-        style={{
-          minHeight: "100vh",
-          width: "35vw",
-          position: "absolute",
-          justifyContent: "flex-start",
-          zIndex: 2,
-        }}
-      ></Box>
+      <HamburgerMenu />
       <Box
         sx={{
-          position: "absolute",
-          zIndex: 3,
+          backgroundColor: (theme) => theme.palette.secondary.main,
           display: "flex",
+          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          height: "100vh",
-          width: "100vw",
+          minHeight: "100vh",
         }}
       >
         {children}
       </Box>
-
-      <Box
-        className={classes.backgroundRight}
-        style={{
-          minHeight: "100vh",
-          width: "100vw",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "flex-end",
-          position: "absolute",
-        }}
-      ></Box>
     </>
   );
 };
