@@ -44,6 +44,15 @@ export const theme = createTheme({
         disableTouchRipple: true,
       },
     },
+    MuiButtonGroup: {
+      styleOverrides: {
+        grouped: {
+          ":not(:last-of-type)": {
+            borderRight: "none",
+          },
+        },
+      },
+    },
     MuiFormHelperText: {
       styleOverrides: {
         root: {

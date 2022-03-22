@@ -1,8 +1,6 @@
 import React, { FC } from "react";
 import {
   Card,
-  CardActionArea,
-  CardActions,
   CardMedia,
   Divider,
   Grid,
@@ -11,14 +9,9 @@ import {
   Typography,
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faGithub,
-  faTwitter,
-  faLinkedin,
-  faInstagram,
-  faCanadianMapleLeaf,
-} from "@fortawesome/free-brands-svg-icons";
+import { faCanadianMapleLeaf } from "@fortawesome/free-brands-svg-icons";
 import { makeStyles } from "@mui/styles";
+import SocialButtonGroup from "./SocialButtonGroup";
 
 const useStyles = makeStyles((theme: Theme) => ({
   cardRoot: {
@@ -42,16 +35,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: "30%",
     marginBottom: 5,
   },
-  linksRoot: {
-    backgroundColor: "#fefefa !important",
-  },
-  links: {
-    display: "flex",
-    justifyContent: "flex-end",
-  },
-  link: {
-    padding: theme.spacing(0, 0.25),
-  },
+
   blurbRoot: {
     [theme.breakpoints.up("md")]: {
       padding: theme.spacing(0, 6),
@@ -191,34 +175,7 @@ const ProfileCard: FC = () => {
           </Grid>
         </Grid>
       </Grid>
-      <CardActionArea className={classes.linksRoot}>
-        <CardActions className={classes.links}>
-          <FontAwesomeIcon
-            className={classes.link}
-            size="2x"
-            color="black"
-            icon={faGithub}
-          />
-          <FontAwesomeIcon
-            className={classes.link}
-            size="2x"
-            color="black"
-            icon={faTwitter}
-          />
-          <FontAwesomeIcon
-            className={classes.link}
-            size="2x"
-            color="black"
-            icon={faLinkedin}
-          />
-          <FontAwesomeIcon
-            className={classes.link}
-            size="2x"
-            color="black"
-            icon={faInstagram}
-          />
-        </CardActions>
-      </CardActionArea>
+      <SocialButtonGroup />
     </Card>
   );
 };
