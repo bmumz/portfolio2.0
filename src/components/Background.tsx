@@ -29,6 +29,7 @@ const Background: FC<BackgroundProps> = ({ children }) => {
           alignItems: "center",
           justifyContent: "center",
           minHeight: "100vh",
+          padding: (theme) => theme.spacing(6, 4),
         }}
       >
         {children}
