@@ -1,6 +1,7 @@
 interface IProject {
   img: Image;
   title: string;
+  blurb: string;
   stack?: Technology[];
   description: string[];
   links: SourceLinks;

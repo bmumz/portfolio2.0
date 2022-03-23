@@ -1,74 +1,115 @@
-import React, { FC } from "react";
-import {
-  Button,
-  Card,
-  CardActionArea,
-  CardActions,
-  CardContent,
-  CardMedia,
-  darken,
-  Theme,
-  Typography,
-} from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
+import { CardMedia, Grid, lighten, Typography } from "@mui/material";
+import StyledButton from "./StyledButton";
+import React, { useState } from "react";
 
-type ProjectCardProps = {
-  project: IProject;
-};
-
-const useStyles = makeStyles((theme: Theme) => ({
-  cardRoot: {
-    maxWidth: 500,
-    margin: theme.spacing(1),
-    backgroundColor: `${darken(
-      theme.palette.background.paper,
-      0.015
-    )} !important`,
-  },
-  linksRoot: {
-    backgroundColor: `${darken(
-      theme.palette.background.paper,
-      0.03
-    )} !important`,
-    cursor: "default",
-  },
-}));
-
-const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
-  const { title, img, stack, description } = project;
-  const classes = useStyles();
+const ProjectCard = ({ project }) => {
+  const { title, img, stack, blurb, description } = project;
+  const [showDescription, setShowDescription] = useState<boolean>(false);
   return (
-    <Card raised className={classes.cardRoot}>
-      <CardMedia component="img" height="300" image={img.url} alt={img.alt} />
-
-      <CardContent>
-        <Typography variant="h6" gutterBottom color="secondary">
-          {title}
-        </Typography>
-        {stack &&
-          stack.map((technology: Technology) => (
-            <Typography variant="body2" color="text.secondary">
-              {technology.name}
+    <>
+      <Grid
+        item
+        sx={{
+          padding: (theme) => theme.spacing(2),
+          borderBottom: (theme) => `1px solid ${theme.palette.text.secondary}`,
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          backgroundColor: `${lighten("#f5ede6", 0.45)} !important`,
+        }}
+      >
+        <Grid
+          item
+          sx={{
+            display: "flex",
+          }}
+        >
+          <Typography
+            color="textSecondary"
+            sx={{
+              fontWeight: 500,
+              letterSpacing: 0.15,
+              paddingRight: (theme) => theme.spacing(1),
+            }}
+          >
+            {title}
+          </Typography>
+          <Typography color="textSecondary"> - {blurb}</Typography>
+          <Grid
+            item
+            sx={{ display: "flex", paddingLeft: (theme) => theme.spacing(1) }}
+          >
+            {stack &&
+              stack.map((technology: Technology) => (
+                <Typography
+                  sx={{
+                    color: (theme) => theme.palette.text.secondary,
+                    padding: (theme) => theme.spacing(0, 0.25),
+                  }}
+                  key={technology.name}
+                >
+                  {technology.icon}
+                </Typography>
+              ))}
+          </Grid>
+        </Grid>
+        <StyledButton onClick={() => setShowDescription(!showDescription)}>
+          {showDescription ? (
+            <KeyboardArrowUp
+              fontSize="small"
+              sx={{
+                color: (theme) => theme.palette.secondary.main,
+              }}
+            />
+          ) : (
+            <KeyboardArrowDown
+              fontSize="small"
+              sx={{
+                color: (theme) => theme.palette.secondary.main,
+              }}
+            />
+          )}
+        </StyledButton>
+      </Grid>
+      {showDescription && (
+        <Grid
+          container
+          flexDirection="row"
+          sx={{
+            flexWrap: "nowrap",
+            borderBottom: (theme) =>
+              `1px solid ${theme.palette.text.secondary}`,
+          }}
+        >
+          <Grid
+            item
+            xs={12}
+            lg={5}
+            sx={{
+              padding: (theme) => theme.spacing(2),
+            }}
+          >
+            <Typography
+              sx={{
+                color: (theme) => theme.palette.text.secondary,
+                letterSpacing: 0.15,
+              }}
+            >
+              Blah blah blah description
             </Typography>
-          ))}
-        <Typography variant="body2" color="text.secondary">
-          Tech Stack
-        </Typography>
-
-        {description &&
-          description.map((paragraph: string) => (
-            <Typography variant="body2" color="text.secondary">
-              {paragraph}
-            </Typography>
-          ))}
-      </CardContent>
-      <CardActionArea className={classes.linksRoot}>
-        <CardActions>
-          <Button size="small">View Live</Button>
-          <Button size="small">View Source Code</Button>
-        </CardActions>
-      </CardActionArea>
-    </Card>
+          </Grid>
+          <Grid item xs={12} lg={7}>
+            <CardMedia
+              component="img"
+              height="250"
+              image={img.url}
+              alt={img.alt}
+            />
+          </Grid>
+        </Grid>
+      )}
+    </>
   );
 };
 
