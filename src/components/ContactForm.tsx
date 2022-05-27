@@ -28,6 +28,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   inputColor: {
     color: `${theme.palette.text.secondary} !important`,
   },
+  honeypot: {
+    display: "none",
+  },
 }));
 
 interface FormValues {
@@ -52,7 +55,7 @@ const ContactForm: FC = () => {
         }}
       >
         <Typography variant="h4" color="secondary" sx={{ fontWeight: 500 }}>
-          Contact Me
+          Let's Connect!
         </Typography>
         <Divider
           variant="fullWidth"
@@ -128,6 +131,8 @@ const ContactForm: FC = () => {
                 }}
                 component={Form}
                 onSubmit={handleCheckForm}
+                data-netlify="true"
+                name="contact"
               >
                 <Grid container>
                   <>
@@ -135,6 +140,12 @@ const ContactForm: FC = () => {
                       container
                       sx={{ display: "flex", justifyContent: "space-between" }}
                     >
+                      <Grid item className={classes.honeypot}>
+                        <label>
+                          Don’t fill this out if you’re human:
+                          <TextField name="bot-field" />
+                        </label>
+                      </Grid>
                       <Grid
                         item
                         xs={12}
@@ -185,7 +196,6 @@ const ContactForm: FC = () => {
                         />
                       </Grid>
                     </Grid>
-
                     <Grid
                       item
                       xs={12}
