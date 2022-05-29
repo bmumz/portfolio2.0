@@ -1,31 +1,47 @@
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
-import { CardMedia, Grid, lighten, Typography } from "@mui/material";
+import { CardMedia, Grid, lighten, Theme, Typography } from "@mui/material";
 import StyledButton from "./StyledButton";
 import React, { useState } from "react";
+import { makeStyles } from "@mui/styles";
+
+const useStyles = makeStyles((theme: Theme) => ({
+  cardRoot: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    borderBottom: `1px solid rgba(33,33,33, 0.3) !important`,
+
+    "&:last-child": {
+      borderBottom: "none !important",
+    },
+  },
+}));
 
 const ProjectCard = ({ project }) => {
   const { title, img, stack, blurb, description } = project;
   const [showDescription, setShowDescription] = useState<boolean>(false);
+  const classes = useStyles();
   return (
     <>
       <Grid
         item
         sx={{
-          padding: (theme) => theme.spacing(2),
-          borderBottom: (theme) => `1px solid ${theme.palette.text.secondary}`,
+          padding: (theme) => theme.spacing(2, 0),
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          backgroundColor: `${lighten("#f5ede6", 0.45)} !important`,
         }}
+        className={classes.cardRoot}
       >
         <Grid
           item
           sx={{
             display: "flex",
+            alignItems: "center",
           }}
         >
           <Typography
+            variant="body1"
             color="textSecondary"
             sx={{
               fontWeight: 500,
@@ -96,7 +112,7 @@ const ProjectCard = ({ project }) => {
                 letterSpacing: 0.15,
               }}
             >
-              Blah blah blah description
+              {project.description}
             </Typography>
           </Grid>
           <Grid item xs={12} lg={7}>

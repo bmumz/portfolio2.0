@@ -7,6 +7,7 @@ import {
   lighten,
   Theme,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCanadianMapleLeaf } from "@fortawesome/free-brands-svg-icons";
@@ -16,7 +17,6 @@ import SocialButtonGroup from "./SocialButtonGroup";
 const useStyles = makeStyles((theme: Theme) => ({
   cardRoot: {
     minWidth: "16vw",
-    maxWidth: "55vw",
     minHeight: "40vh",
     display: "flex",
     flexDirection: "column",
@@ -49,6 +49,36 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const ProfileCard: FC = () => {
   const classes = useStyles();
+  const isLarge = useMediaQuery((theme: Theme) => theme.breakpoints.up("lg"));
+  const isBetween = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.between("lg", 1600)
+  );
+  const isXtra = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.between(1600, 2000)
+  );
+  const isQHD = useMediaQuery((theme: Theme) => theme.breakpoints.up(2000));
+  const isTablet = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.between("md", "lg")
+  );
+  const isMobile = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down("sm")
+  );
+
+  const getWidth = () => {
+    if (isMobile) {
+      return "95vw";
+    } else if (isTablet) {
+      return "80vw";
+    } else if (isLarge && !isBetween && !isXtra && !isQHD) {
+      return "55vw";
+    } else if (isBetween) {
+      return "75vw";
+    } else if (isXtra && !isQHD) {
+      return "60vw";
+    } else if (isQHD) {
+      return "40vw";
+    }
+  };
 
   return (
     <Card raised className={classes.cardRoot}>
@@ -58,6 +88,7 @@ const ProfileCard: FC = () => {
           padding: (theme) => theme.spacing(4, 6),
           flexDirection: (theme) =>
             theme.breakpoints.down("md") ? "row" : "column",
+          maxWidth: getWidth(),
         }}
       >
         <Grid
