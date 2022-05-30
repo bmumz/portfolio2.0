@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: "space-between",
     alignItems: "center",
     borderBottom: `1px solid rgba(33,33,33, 0.3) !important`,
+    cursor: "pointer",
 
     "&:last-child": {
       borderBottom: "none !important",
@@ -46,6 +47,7 @@ const ProjectCard = ({ project }) => {
           alignItems: "center",
         }}
         className={classes.cardRoot}
+        onClick={() => setShowDescription(!showDescription)}
       >
         <Grid
           item
@@ -74,6 +76,7 @@ const ProjectCard = ({ project }) => {
               <TechnologyIcon
                 technology={technology}
                 className={classes.icon}
+                key={technology}
               />
             ))}
           </Grid>
@@ -112,7 +115,7 @@ const ProjectCard = ({ project }) => {
             xs={12}
             lg={5}
             sx={{
-              padding: (theme) => theme.spacing(2),
+              padding: (theme) => theme.spacing(2, 0),
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
