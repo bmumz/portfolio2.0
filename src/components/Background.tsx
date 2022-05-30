@@ -1,33 +1,24 @@
 import React, { FC } from "react";
-import { Theme, Box } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import { Box } from "@mui/material";
 import HamburgerMenu from "./menu/HamburgerMenu";
-
-const useStyles = makeStyles((theme: Theme) => ({
-  backgroundLeft: {
-    backgroundColor: "#f5ede6",
-  },
-  backgroundRight: {
-    backgroundColor: "#034C52",
-  },
-}));
 
 type BackgroundProps = {
   children: JSX.Element | JSX.Element[];
 };
 
 const Background: FC<BackgroundProps> = ({ children }) => {
-  const classes = useStyles();
   return (
     <>
       <HamburgerMenu />
       <Box
         sx={{
+          position: "relative",
           backgroundColor: (theme) => theme.palette.secondary.main,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
+          height: "100%",
           minHeight: "100vh",
           padding: (theme) => theme.spacing(6, 4),
         }}

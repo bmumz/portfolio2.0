@@ -15,20 +15,6 @@ import { makeStyles } from "@mui/styles";
 import SocialButtonGroup from "../SocialButtonGroup";
 
 const useStyles = makeStyles((theme: Theme) => ({
-  cardRoot: {
-    minWidth: "16vw",
-    minHeight: "40vh",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    zIndex: 3,
-    backgroundColor: `${lighten("#f5ede6", 0.45)} !important`,
-    margin: theme.spacing(8, 0),
-    [theme.breakpoints.down("md")]: {
-      minWidth: "40vw",
-      maxWidth: "80vw",
-    },
-  },
   divider: {
     borderColor: `${theme.palette.secondary.dark} !important`,
     borderBottomWidth: "2 !important",
@@ -101,7 +87,27 @@ const Card: FC<{ children: JSX.Element }> = ({ children }) => {
   const node = data.allMarkdownRemark.edges[0].node;
 
   return (
-    <MUICard raised className={classes.cardRoot}>
+    <MUICard
+      raised
+      sx={{
+        minHeight: "40vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        zIndex: 3,
+        backgroundColor: `${lighten("#f5ede6", 0.45)} !important`,
+        margin: (theme) => theme.spacing(8, 0),
+        minWidth: {
+          lg: "16vw",
+          md: "40vw",
+          sm: "40vw",
+        },
+        maxWidth: {
+          md: "80vw",
+          sm: "80vw",
+        },
+      }}
+    >
       <Grid
         container
         sx={{

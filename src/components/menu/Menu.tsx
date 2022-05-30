@@ -6,28 +6,6 @@ import GatsbyLink from "gatsby-link";
 import { isInternalLink } from "../../utils";
 
 const useStyles = makeStyles((theme: Theme) => ({
-  drawerRoot: {
-    zIndex: "3 !important",
-  },
-  drawerPaper: {
-    padding: theme.spacing(2),
-    [theme.breakpoints.up("lg")]: {
-      width: "25vw",
-    },
-    [theme.breakpoints.down("sm")]: {
-      width: "100vw",
-    },
-  },
-  menuRoot: {
-    paddingTop: theme.spacing(6),
-    display: "flex",
-    flexDirection: "column",
-  },
-  linkRoot: {
-    textDecoration: "none",
-    fontSize: "2rem",
-    padding: theme.spacing(1),
-  },
   linkTitle: {
     fontWeight: "500 !important",
     letterSpacing: `${theme.spacing(0.25)} !important`,
@@ -82,13 +60,27 @@ const Menu: FC<MenuProps> = ({ pages, isOpen, setIsOpen }) => {
       variant="temporary"
       open={isOpen}
       onClose={() => setIsOpen(false)}
-      className={classes.drawerRoot}
+      sx={{
+        zIndex: 3,
+      }}
       PaperProps={{
-        className: classes.drawerPaper,
-        sx: { backgroundColor: (theme) => theme.palette.background.default },
+        sx: {
+          padding: (theme) => theme.spacing(2),
+          backgroundColor: (theme) => theme.palette.background.default,
+          width: {
+            lg: "25vw",
+            sm: "100vw",
+          },
+        },
       }}
     >
-      <Box className={classes.menuRoot}>
+      <Box
+        sx={{
+          paddingTop: (theme) => theme.spacing(6),
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
         {pages &&
           pages.map((page: IPage, index) => {
             const isInternal = isInternalLink(page.href);
@@ -99,7 +91,11 @@ const Menu: FC<MenuProps> = ({ pages, isOpen, setIsOpen }) => {
                     component={GatsbyLink}
                     to={page.href}
                     onClick={() => setIsOpen(false)}
-                    className={classes.linkRoot}
+                    sx={{
+                      textDecoration: "none",
+                      fontSize: "2rem",
+                      padding: (theme) => theme.spacing(1),
+                    }}
                   >
                     <PageTitle title={page.title} />
                   </Link>
@@ -107,7 +103,11 @@ const Menu: FC<MenuProps> = ({ pages, isOpen, setIsOpen }) => {
                   <a
                     href={page.href}
                     onClick={() => setIsOpen(false)}
-                    className={classes.linkRoot}
+                    style={{
+                      textDecoration: "none",
+                      fontSize: "2rem",
+                      padding: 8,
+                    }}
                   >
                     <PageTitle title={page.title} />
                   </a>

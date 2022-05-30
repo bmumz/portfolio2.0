@@ -81,7 +81,27 @@ const ProfileCard: FC = () => {
   };
 
   return (
-    <Card raised className={classes.cardRoot}>
+    <Card
+      raised
+      sx={{
+        minHeight: "40vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        zIndex: 3,
+        backgroundColor: `${lighten("#f5ede6", 0.45)} !important`,
+        margin: (theme) => theme.spacing(8, 0),
+        minWidth: {
+          lg: "16vw",
+          md: "40vw",
+          sm: "40vw",
+        },
+        maxWidth: {
+          md: "80vw",
+          sm: "80vw",
+        },
+      }}
+    >
       <Grid
         container
         sx={{
@@ -176,7 +196,18 @@ const ProfileCard: FC = () => {
               paddingTop: (theme) => theme.spacing(2),
             }}
           >
-            Hi 👋, I'm <span className={classes.name}>Brandi</span> —
+            Hi 👋, I'm{" "}
+            <Typography
+              component="span"
+              variant="h6"
+              color="secondary"
+              sx={(theme) => ({
+                paddingLeft: theme.spacing(1),
+              })}
+            >
+              Brandi
+            </Typography>{" "}
+            —
           </Typography>
           <Grid container>
             <Typography
