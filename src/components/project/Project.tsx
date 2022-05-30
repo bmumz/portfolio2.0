@@ -1,5 +1,12 @@
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
-import { Button, CardMedia, Grid, Theme, Typography } from "@mui/material";
+import {
+  Button,
+  CardMedia,
+  Grid,
+  Theme,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import StyledButton from "../StyledButton";
 import React, { useState } from "react";
 import { makeStyles } from "@mui/styles";
@@ -19,8 +26,28 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   expandedCard: {
     borderBottom: `1px solid rgba(33,33,33, 0.3) !important`,
+    flexDirection: "row",
     "&:last-child": {
       borderBottom: "none !important",
+    },
+    [theme.breakpoints.down(1250)]: {
+      flexDirection: "column-reverse !important",
+      alignItems: "center !important",
+    },
+    [theme.breakpoints.up("sm")]: {
+      padding: theme.spacing(2, 0),
+    },
+  },
+  imgContainer: {
+    justifyContent: "flex-end",
+    [theme.breakpoints.down(1250)]: {
+      justifyContent: "center",
+    },
+  },
+  img: {
+    width: "400px !important",
+    [theme.breakpoints.down("sm")]: {
+      width: "250px !important",
     },
   },
   icon: {
@@ -35,6 +62,7 @@ const ProjectCard = ({ project }) => {
   const { html } = project;
   const [showDescription, setShowDescription] = useState<boolean>(false);
   const classes = useStyles();
+  const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down(725));
 
   return (
     <>
@@ -67,7 +95,9 @@ const ProjectCard = ({ project }) => {
           >
             {title}
           </Typography>
-          <Typography color="textSecondary"> - {blurb}</Typography>
+          {!isMobile && (
+            <Typography color="textSecondary"> - {blurb}</Typography>
+          )}
           <Grid
             item
             sx={{ display: "flex", paddingLeft: (theme) => theme.spacing(1) }}
@@ -102,7 +132,6 @@ const ProjectCard = ({ project }) => {
       {showDescription && (
         <Grid
           container
-          flexDirection="row"
           sx={{
             flexWrap: "nowrap",
             alignItems: "space-between",
@@ -115,7 +144,6 @@ const ProjectCard = ({ project }) => {
             xs={12}
             lg={5}
             sx={{
-              padding: (theme) => theme.spacing(2, 0),
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
@@ -165,15 +193,16 @@ const ProjectCard = ({ project }) => {
             item
             xs={12}
             lg={7}
-            sx={{ display: "flex", justifyContent: "flex-end" }}
+            sx={{ display: "flex" }}
+            className={classes.imgContainer}
           >
             <CardMedia
               component="img"
               image={imgUrl}
               alt={`${title} - ${blurb}`}
+              className={classes.img}
               sx={{
                 display: "unset",
-                width: 450,
                 borderRadius: 2,
                 margin: (theme) => theme.spacing(2),
               }}

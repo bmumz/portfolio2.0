@@ -1,10 +1,10 @@
-import React from "react";
+import React, { FC } from "react";
 import { Grid } from "@mui/material";
 import ProjectCard from "../components/project/Project";
 import Card from "../components/project/Card";
 import { useStaticQuery, graphql, Node } from "gatsby";
 
-const ProjectsPage = () => {
+const ProjectsPage: FC = () => {
   const data = useStaticQuery(graphql`
     query Projects {
       allMarkdownRemark(
@@ -42,6 +42,7 @@ const ProjectsPage = () => {
           minWidth: "40vw",
           borderRadius: 10,
           marginTop: "2rem",
+          padding: "2rem",
         }}
       >
         {projects &&

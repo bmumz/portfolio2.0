@@ -48,9 +48,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   statsContainer: {
     width: "unset !important",
   },
+  projectRoot: {
+    padding: theme.spacing(2),
+    [theme.breakpoints.down("sm")]: {
+      padding: 0,
+    },
+  },
 }));
 
-const Card: FC = ({ children }) => {
+const Card: FC<{ children: JSX.Element }> = ({ children }) => {
   const classes = useStyles();
   const isLarge = useMediaQuery((theme: Theme) => theme.breakpoints.up("lg"));
   const isBetween = useMediaQuery((theme: Theme) =>
@@ -63,9 +69,7 @@ const Card: FC = ({ children }) => {
   const isTablet = useMediaQuery((theme: Theme) =>
     theme.breakpoints.between("md", "lg")
   );
-  const isMobile = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.down("sm")
-  );
+  const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down(640));
 
   const getWidth = () => {
     if (isMobile) {
@@ -84,13 +88,10 @@ const Card: FC = ({ children }) => {
   };
 
   const data = useStaticQuery(graphql`
-    query GithubStats {
-      allMarkdownRemark {
+    query GitHubStats {
+      allMarkdownRemark(filter: { frontmatter: { type: { eq: "stats" } } }) {
         edges {
           node {
-            frontmatter {
-              title
-            }
             html
           }
         }
@@ -104,12 +105,12 @@ const Card: FC = ({ children }) => {
       <Grid
         container
         sx={{
-          padding: (theme) => theme.spacing(4, 6),
           justifyContent: "center",
           flexDirection: (theme) =>
             theme.breakpoints.down("md") ? "row" : "column",
           maxWidth: getWidth(),
         }}
+        className={classes.projectRoot}
       >
         <Grid
           container
@@ -139,7 +140,7 @@ const Card: FC = ({ children }) => {
                 display: "flex",
                 alignItems: "center",
                 flexDirection: "column",
-                paddingTop: (theme) => theme.spacing(2),
+                // paddingTop: (theme) => theme.spacing(2),
               }}
             >
               <Typography

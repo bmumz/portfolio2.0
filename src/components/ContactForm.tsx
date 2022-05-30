@@ -28,9 +28,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   inputColor: {
     color: `${theme.palette.text.secondary} !important`,
   },
-  honeypot: {
-    display: "none",
-  },
 }));
 
 interface FormValues {
@@ -140,12 +137,6 @@ const ContactForm: FC = () => {
                       container
                       sx={{ display: "flex", justifyContent: "space-between" }}
                     >
-                      <Grid item className={classes.honeypot}>
-                        <label>
-                          Don’t fill this out if you’re human:
-                          <TextField name="bot-field" />
-                        </label>
-                      </Grid>
                       <Grid
                         item
                         xs={12}
