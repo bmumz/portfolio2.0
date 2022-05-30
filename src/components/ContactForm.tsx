@@ -33,6 +33,14 @@ const ContactForm: FC = () => {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
 
+  const encode = (data) => {
+    return Object.keys(data)
+      .map(
+        (key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+      )
+      .join("&");
+  };
+
   return (
     <Card raised className={classes.cardRoot}>
       <CardContent
@@ -73,19 +81,25 @@ const ContactForm: FC = () => {
           message: Yup.string().max(1500).required("Message is required."),
         })}
         onSubmit={(values: FormValues, { resetForm }) => {
-          // TO DO: submit email to BE
-          console.log(values);
-          try {
-            enqueueSnackbar("Your inquiry has been submitted!", {
-              variant: "success",
-            });
-            resetForm();
-          } catch (err) {
-            console.error(err);
-            enqueueSnackbar("There was an error submitting the form.", {
-              variant: "error",
-            });
-          }
+          fetch("/", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: encode({ "form-name": "contact", ...values }),
+          }).then(() => {
+            try {
+              enqueueSnackbar("Your inquiry has been submitted!", {
+                variant: "success",
+              });
+              resetForm();
+            } catch (err) {
+              console.error(err);
+              enqueueSnackbar("There was an error submitting the form.", {
+                variant: "error",
+              });
+            }
+          });
         }}
       >
         {({
@@ -122,7 +136,7 @@ const ContactForm: FC = () => {
                 }}
                 component={Form}
                 onSubmit={handleCheckForm}
-                data-netlify="true"
+                data-netlify={true}
                 method="post"
                 name="contact"
               >
