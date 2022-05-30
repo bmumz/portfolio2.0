@@ -20,14 +20,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: "90vw",
     },
   },
-  smallInputPadding: {
-    [theme.breakpoints.up("md")]: {
-      paddingRight: `${theme.spacing(3)} !important`,
-    },
-  },
-  inputColor: {
-    color: `${theme.palette.text.secondary} !important`,
-  },
 }));
 
 interface FormValues {
@@ -80,13 +72,14 @@ const ContactForm: FC = () => {
           subject: Yup.string().max(350).required("Subject is required."),
           message: Yup.string().max(1500).required("Message is required."),
         })}
-        onSubmit={(values: FormValues) => {
+        onSubmit={(values: FormValues, { resetForm }) => {
           // TO DO: submit email to BE
           console.log(values);
           try {
             enqueueSnackbar("Your inquiry has been submitted!", {
               variant: "success",
             });
+            resetForm();
           } catch (err) {
             console.error(err);
             enqueueSnackbar("There was an error submitting the form.", {
@@ -104,6 +97,7 @@ const ContactForm: FC = () => {
           touched,
           values,
           setStatus,
+          isSubmitting,
         }): JSX.Element => {
           const handleCheckForm = (event: React.FormEvent<HTMLFormElement>) => {
             event.preventDefault();
@@ -112,7 +106,7 @@ const ContactForm: FC = () => {
           };
 
           useEffect(() => {
-            if (status === "verifying" && errors) {
+            if (status === "verifying" && !isSubmitting && errors) {
               enqueueSnackbar("Please review the form and fix any errors.", {
                 variant: "error",
               });
@@ -129,6 +123,7 @@ const ContactForm: FC = () => {
                 component={Form}
                 onSubmit={handleCheckForm}
                 data-netlify="true"
+                method="post"
                 name="contact"
               >
                 <Grid container>
@@ -144,16 +139,21 @@ const ContactForm: FC = () => {
                         lg={6}
                         sx={{
                           paddingTop: (theme) => theme.spacing(3),
+                          paddingRight: {
+                            lg: "1rem",
+                          },
                         }}
-                        className={classes.smallInputPadding}
                       >
                         <TextField
                           id="name"
+                          name="name"
                           label="name"
                           variant="filled"
                           fullWidth
                           inputProps={{
-                            className: classes.inputColor,
+                            sx: {
+                              color: (theme) => theme.palette.text.secondary,
+                            },
                           }}
                           onBlur={handleBlur}
                           onChange={handleChange}
@@ -173,11 +173,14 @@ const ContactForm: FC = () => {
                       >
                         <TextField
                           id="email"
+                          name="email"
                           label="email"
                           variant="filled"
                           fullWidth
                           inputProps={{
-                            className: classes.inputColor,
+                            sx: {
+                              color: (theme) => theme.palette.text.secondary,
+                            },
                           }}
                           onBlur={handleBlur}
                           onChange={handleChange}
@@ -196,11 +199,14 @@ const ContactForm: FC = () => {
                     >
                       <TextField
                         id="subject"
+                        name="subject"
                         label="subject"
                         variant="filled"
                         fullWidth
                         inputProps={{
-                          className: classes.inputColor,
+                          sx: {
+                            color: (theme) => theme.palette.text.secondary,
+                          },
                         }}
                         onBlur={handleBlur}
                         onChange={handleChange}
@@ -218,13 +224,16 @@ const ContactForm: FC = () => {
                     >
                       <TextField
                         id="message"
+                        name="message"
                         label="message"
                         variant="filled"
                         fullWidth
                         multiline
                         rows={4}
                         inputProps={{
-                          className: classes.inputColor,
+                          sx: {
+                            color: (theme) => theme.palette.text.secondary,
+                          },
                         }}
                         onBlur={handleBlur}
                         onChange={handleChange}

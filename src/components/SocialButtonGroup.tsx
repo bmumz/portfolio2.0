@@ -5,29 +5,11 @@ import {
   faLinkedin,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
-import { makeStyles } from "@mui/styles";
 import React from "react";
-import {
-  CardActionArea,
-  CardActions,
-  ButtonGroup,
-  Theme,
-  Link,
-} from "@mui/material";
+import { CardActionArea, CardActions, ButtonGroup, Link } from "@mui/material";
 import StyledButton from "./StyledButton";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  links: {
-    display: "flex",
-    justifyContent: "flex-end",
-  },
-  link: {
-    padding: theme.spacing(0, 0.25),
-  },
-}));
 const SocialButtonGroup = () => {
-  const classes = useStyles();
-
   const socials = {
     github: { link: "https://www.github.com/bmumz" },
     twitter: { link: "https://www.twitter.com/brandicodes" },
@@ -37,7 +19,7 @@ const SocialButtonGroup = () => {
 
   return (
     <CardActionArea sx={{ cursor: "default", backgroundColor: "#fefefa" }}>
-      <CardActions className={classes.links}>
+      <CardActions sx={{ display: "flex", justifyContent: "flex-end" }}>
         <ButtonGroup variant="text" sx={{ border: "none" }}>
           <StyledButton
             // @ts-ignore
@@ -46,11 +28,7 @@ const SocialButtonGroup = () => {
             rel="noreferrer"
             href={socials.github.link}
           >
-            <FontAwesomeIcon
-              className={classes.link}
-              size="2x"
-              icon={faGithub}
-            />
+            <FontAwesomeIcon size="lg" icon={faGithub} />
           </StyledButton>
           <StyledButton
             // @ts-ignore
@@ -59,11 +37,7 @@ const SocialButtonGroup = () => {
             rel="noreferrer"
             href={socials.twitter.link}
           >
-            <FontAwesomeIcon
-              className={classes.link}
-              size="2x"
-              icon={faTwitter}
-            />
+            <FontAwesomeIcon size="lg" icon={faTwitter} />
           </StyledButton>
           <StyledButton
             // @ts-ignore
@@ -72,11 +46,7 @@ const SocialButtonGroup = () => {
             rel="noreferrer"
             href={socials.linkedin.link}
           >
-            <FontAwesomeIcon
-              className={classes.link}
-              size="2x"
-              icon={faLinkedin}
-            />
+            <FontAwesomeIcon size="lg" icon={faLinkedin} />
           </StyledButton>
           <StyledButton
             // @ts-ignore
@@ -85,11 +55,7 @@ const SocialButtonGroup = () => {
             rel="noreferrer"
             href={socials.instagram.link}
           >
-            <FontAwesomeIcon
-              className={classes.link}
-              size="2x"
-              icon={faInstagram}
-            />
+            <FontAwesomeIcon size="lg" icon={faInstagram} />
           </StyledButton>
         </ButtonGroup>
       </CardActions>

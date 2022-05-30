@@ -7,45 +7,36 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { Close as CloseIcon, Menu as MenuIcon } from "@mui/icons-material";
-import { makeStyles } from "@mui/styles";
-
 import Menu from "./Menu";
 import { pages } from "../../routes";
 
-const useStyles = makeStyles({
-  appBar: {
-    boxShadow: "none !important",
-    zIndex: 2,
-    minHeight: "100%",
-    width: "unset !important",
-  },
-  toolbar: {
-    display: "flex",
-    justifyContent: "flex-end",
-  },
-});
-
 const HamburgerMenu: FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const classes = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <>
-      <AppBar color="transparent" className={classes.appBar}>
-        <Toolbar disableGutters className={classes.toolbar}>
+      <AppBar
+        color="transparent"
+        sx={{ boxShadow: "none", zIndex: 4, minHeight: "100%", width: "unset" }}
+      >
+        <Toolbar
+          disableGutters
+          sx={{ display: "flex", justifyContent: "flex-end" }}
+        >
           <IconButton
             edge="start"
             aria-label="open drawer"
             onClick={() => setIsOpen(!isOpen)}
             disableRipple
             size="large"
-            sx={{ zIndex: 2 }}
           >
             {isOpen ? (
               <CloseIcon
-                color="secondary"
+                sx={{
+                  color: (theme) => theme.palette.primary.main,
+                }}
                 fontSize={isMobile ? "medium" : "large"}
               />
             ) : (
