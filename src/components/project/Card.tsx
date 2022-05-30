@@ -12,7 +12,7 @@ import { useStaticQuery, graphql } from "gatsby";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCanadianMapleLeaf } from "@fortawesome/free-brands-svg-icons";
 import { makeStyles } from "@mui/styles";
-import SocialButtonGroup from "./SocialButtonGroup";
+import SocialButtonGroup from "../SocialButtonGroup";
 
 const useStyles = makeStyles((theme: Theme) => ({
   cardRoot: {
@@ -84,7 +84,7 @@ const Card: FC = ({ children }) => {
   };
 
   const data = useStaticQuery(graphql`
-    query GithubStatsss {
+    query GithubStats {
       allMarkdownRemark {
         edges {
           node {
@@ -188,7 +188,6 @@ const Card: FC = ({ children }) => {
             </Grid>
           )}
         </Grid>
-
         {children}
       </Grid>
       <SocialButtonGroup />

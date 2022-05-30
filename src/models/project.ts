@@ -2,7 +2,7 @@ interface IProject {
   img: Image;
   title: string;
   blurb: string;
-  stack?: Technology[];
+  technologies: string[];
   description: string[];
   links: SourceLinks;
 }
@@ -12,12 +12,12 @@ type Image = {
   alt: string;
 };
 
-type Technology = {
-  name: string;
-  icon: JSX.Element;
-};
-
 type SourceLinks = {
   site: string;
   github: string;
+};
+
+type TechnologyIcon = {
+  technology: string;
+  className: string;
 };
