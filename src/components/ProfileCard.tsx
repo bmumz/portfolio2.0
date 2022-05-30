@@ -125,7 +125,7 @@ const ProfileCard: FC = () => {
           <CardMedia
             component="img"
             height="300"
-            image="https://brandi.codes/static/75b7b58e52612b5966855f7e3acf1c36/88b18/headshot01.jpg"
+            image="https://i.ibb.co/7kgHt0W/4-FC2-D199-135-E-4054-B814-E6-CF750-D0-E78.jpg"
             alt="Brandi's headshot"
             sx={{ borderRadius: "100%", width: 250, height: 250 }}
           />
@@ -140,7 +140,7 @@ const ProfileCard: FC = () => {
           >
             <Typography
               variant="h4"
-              color="secondary"
+              color="primary"
               sx={{
                 fontWeight: 500,
                 fontSize: (theme) => theme.breakpoints.down("sm") && "1.5rem",
