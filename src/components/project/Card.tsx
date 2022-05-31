@@ -1,18 +1,16 @@
 import React, { FC } from "react";
 import {
   Card as MUICard,
-  CardMedia,
   Grid,
   lighten,
   Theme,
-  Typography,
   useMediaQuery,
 } from "@mui/material";
 import { useStaticQuery, graphql } from "gatsby";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCanadianMapleLeaf } from "@fortawesome/free-brands-svg-icons";
 import { makeStyles } from "@mui/styles";
+
 import SocialButtonGroup from "../SocialButtonGroup";
+import Headshot from "../Headshot";
 
 const useStyles = makeStyles((theme: Theme) => ({
   divider: {
@@ -122,61 +120,7 @@ const Card: FC<{ children: JSX.Element }> = ({ children }) => {
           container
           sx={{ justifyContent: "space-around", alignItems: "center" }}
         >
-          <Grid
-            item
-            xs={12}
-            lg={4}
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <CardMedia
-              component="img"
-              height="300"
-              image="https://brandi.codes/static/75b7b58e52612b5966855f7e3acf1c36/88b18/headshot01.jpg"
-              alt="Brandi's headshot"
-              sx={{ borderRadius: "100%", width: 250, height: 250 }}
-            />
-            <Grid
-              item
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                flexDirection: "column",
-                // paddingTop: (theme) => theme.spacing(2),
-              }}
-            >
-              <Typography
-                variant="h4"
-                color="secondary"
-                sx={{
-                  fontWeight: 500,
-                  fontSize: (theme) => theme.breakpoints.down("sm") && "1.5rem",
-                }}
-              >
-                Brandi Mummery
-              </Typography>
-
-              <Typography
-                variant="h6"
-                color="text.secondary"
-                sx={{ letterSpacing: (theme) => theme.spacing(0.15) }}
-              >
-                Software Developer
-              </Typography>
-              <Typography
-                variant="subtitle2"
-                color="text.secondary"
-                sx={{ letterSpacing: (theme) => theme.spacing(0.25) }}
-              >
-                Toronto, ON{" "}
-                <FontAwesomeIcon icon={faCanadianMapleLeaf} color="#C41E3A" />
-              </Typography>
-            </Grid>
-          </Grid>
+          <Headshot />
           {!isMobile && (
             <Grid
               container
