@@ -3,7 +3,6 @@ import { Button } from "@mui/material";
 
 const LinkButton: FC<LinkButtonType> = ({ url, title }) => (
   <Button
-    size="large"
     variant="contained"
     href={url}
     target="_blank"
