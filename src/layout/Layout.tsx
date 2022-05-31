@@ -18,6 +18,7 @@ const Layout: FC<LayoutProps> = ({ children }) => (
           width: "100%",
           display: "flex",
           justifyContent: "center",
+          alignItems: "center",
           height: 50,
         }}
       >

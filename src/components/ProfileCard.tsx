@@ -137,7 +137,7 @@ const ProfileCard: FC = () => {
             <Typography
               component="span"
               variant="h6"
-              color="secondary"
+              color="primary"
               sx={(theme) => ({
                 paddingLeft: theme.spacing(1),
               })}

@@ -7,41 +7,11 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { useStaticQuery, graphql } from "gatsby";
-import { makeStyles } from "@mui/styles";
 
 import SocialButtonGroup from "../SocialButtonGroup";
 import Headshot from "../Headshot";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  divider: {
-    borderColor: `${theme.palette.secondary.dark} !important`,
-    borderBottomWidth: "2 !important",
-    width: "30%",
-    marginBottom: 5,
-  },
-
-  blurbRoot: {
-    [theme.breakpoints.up("md")]: {
-      padding: theme.spacing(0, 6),
-    },
-  },
-  name: {
-    paddingLeft: theme.spacing(1),
-    color: theme.palette.primary.main,
-  },
-  statsContainer: {
-    width: "unset !important",
-  },
-  projectRoot: {
-    padding: theme.spacing(2),
-    [theme.breakpoints.down("sm")]: {
-      padding: 0,
-    },
-  },
-}));
-
 const Card: FC<{ children: JSX.Element }> = ({ children }) => {
-  const classes = useStyles();
   const isLarge = useMediaQuery((theme: Theme) => theme.breakpoints.up("lg"));
   const isBetween = useMediaQuery((theme: Theme) =>
     theme.breakpoints.between("lg", 1600)
@@ -108,13 +78,24 @@ const Card: FC<{ children: JSX.Element }> = ({ children }) => {
     >
       <Grid
         container
-        sx={{
+        sx={(theme) => ({
           justifyContent: "center",
-          flexDirection: (theme) =>
-            theme.breakpoints.down("md") ? "row" : "column",
+          flexDirection: {
+            xl: "column",
+            lg: "column",
+            md: "row",
+            sm: "row",
+            xs: "row",
+          },
           maxWidth: getWidth(),
-        }}
-        className={classes.projectRoot}
+          padding: {
+            xl: theme.spacing(2),
+            lg: theme.spacing(2),
+            md: theme.spacing(2),
+            sm: 0,
+            xs: 0,
+          },
+        })}
       >
         <Grid
           container
@@ -124,10 +105,15 @@ const Card: FC<{ children: JSX.Element }> = ({ children }) => {
           {!isMobile && (
             <Grid
               container
-              sx={(theme: Theme) =>
-                theme.breakpoints.down("md") && { justifyContent: "center" }
-              }
-              className={classes.statsContainer}
+              sx={{
+                justifyContent: {
+                  md: "center",
+                  sm: "center",
+                  xs: "center",
+                },
+                width: 495,
+                height: 195,
+              }}
             >
               <Grid
                 item
