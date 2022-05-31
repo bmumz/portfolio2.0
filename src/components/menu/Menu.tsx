@@ -68,8 +68,10 @@ const Menu: FC<MenuProps> = ({ pages, isOpen, setIsOpen }) => {
           padding: (theme) => theme.spacing(2),
           backgroundColor: (theme) => theme.palette.background.default,
           width: {
-            lg: "25vw",
-            sm: "100vw",
+            lg: "25%",
+            md: "25%",
+            sm: "100%",
+            xs: "100%",
           },
         },
       }}

@@ -42,9 +42,15 @@ const HamburgerMenu: FC = () => {
             ) : (
               <MenuIcon
                 fontSize={isMobile ? "medium" : "large"}
-                sx={{
-                  color: (theme) => theme.palette.background.paper,
-                }}
+                sx={(theme) => ({
+                  color: {
+                    xs: theme.palette.primary.main,
+                    sm: theme.palette.primary.main,
+                    md: theme.palette.background.paper,
+                    lg: theme.palette.background.paper,
+                    xl: theme.palette.background.paper,
+                  },
+                })}
               />
             )}
           </IconButton>

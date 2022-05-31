@@ -13,6 +13,7 @@ const Headshot: FC<{ divider?: boolean }> = ({ divider }) => (
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
+      paddingTop: (theme) => theme.spacing(4),
     }}
   >
     <CardMedia
@@ -20,7 +21,7 @@ const Headshot: FC<{ divider?: boolean }> = ({ divider }) => (
       height="300"
       image="https://i.ibb.co/7kgHt0W/4-FC2-D199-135-E-4054-B814-E6-CF750-D0-E78.jpg"
       alt="Brandi's headshot"
-      sx={{ borderRadius: "100%", width: 250, height: 250 }}
+      sx={{ borderRadius: "100%", width: 220, height: 220 }}
     />
     <Grid
       item

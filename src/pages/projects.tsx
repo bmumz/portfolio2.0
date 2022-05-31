@@ -41,7 +41,6 @@ const ProjectsPage: FC = () => {
           flexDirection: "column",
           minWidth: "40vw",
           borderRadius: 10,
-          marginTop: "2rem",
           padding: "2rem",
         }}
       >
