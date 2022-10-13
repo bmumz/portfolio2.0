@@ -39,7 +39,7 @@ const ProjectsPage: FC = () => {
           display: "flex",
           justifyContent: "center",
           flexDirection: "column",
-          minWidth: "40vw",
+          width: "60vw",
           borderRadius: 10,
           padding: "2rem",
         }}
