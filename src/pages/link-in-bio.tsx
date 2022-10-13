@@ -4,8 +4,12 @@ import LinkButton from "../components/LinkButton";
 
 const referralLinks = [
   {
-    title: "Try Sunsama free for 2 weeks!",
-    url: "https://sunsama.grsm.io/brandiCodes",
+    title: "Learn more about the BenQ Screenbars!",
+    url: "https://www.benq.com/en-us/lighting/monitor-light.html",
+  },
+  {
+    title: "Purchase BenQ Screenbar Halo",
+    url: "https://www.amazon.com/dp/B08WT889V3?ref=emc_p_m_5_i",
   },
   {
     title: "Get 10% off at Xreart Frames",
