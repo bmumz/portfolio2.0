@@ -4,7 +4,7 @@ import LinkButton from "../components/LinkButton";
 
 const referralLinks = [
   {
-    title: "Learn more about the BenQ Screenbars!",
+    title: "Learn more about BenQ Screenbars!",
     url: "https://www.benq.com/en-us/lighting/monitor-light.html",
   },
   {
@@ -81,6 +81,7 @@ const LinksPage = () => (
             variant="h4"
             color="textPrimary"
             sx={{
+              textAlign: "center",
               fontWeight: 500,
               fontSize: (theme) => theme.breakpoints.down("sm") && "1.5rem",
             }}
