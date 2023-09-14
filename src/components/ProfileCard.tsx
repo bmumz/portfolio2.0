@@ -174,7 +174,9 @@ const ProfileCard: FC = () => {
           </Grid>
         </Grid>
       </Grid>
-      <SocialButtonGroup />
+      <div style={{ marginTop: "auto" }}>
+        <SocialButtonGroup />
+      </div>
     </Card>
   );
 };
